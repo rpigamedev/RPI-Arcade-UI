@@ -6,32 +6,65 @@ public class LaunchExternalProgram : MonoBehaviour {
 
     Process launchedGame;
 
-    // Use this for initialization
-    void Start () {
-        launchedGame = new Process();
-        launchedGame.StartInfo.FileName = "notepad.exe";
-        launchedGame.StartInfo.Arguments = "";
+    string PathToGames;
 
-        //use to create no window when running cmd script
+    // Function to launch the game directly (no shim, no force quitting)
+    public void launchGameDirect (string ExeFolder, string ExeName, string Args) {
+        launchedGame = new Process();
+
+        // Use to create no window when running from shell
         launchedGame.StartInfo.UseShellExecute = true;
         launchedGame.StartInfo.CreateNoWindow = true;
         launchedGame.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
+
+        // Set game launch parameters
+        launchedGame.StartInfo.WorkingDirectory = PathtoGames + "/" + ExeFolder;
+        launchedGame.StartInfo.FileName = ExeName;
+        launchedGame.StartInfo.Arguments = Args;
 
         Application.runInBackground = true;
 
         launchedGame.Start();
 
-        //if you want program to halt until script is finished
-        //process.WaitForExit();
+        //UI will halt until game is finished
+        launchedGame.WaitForExit();
+    }
+
+    // Function to launch the game using the AutoHotKey shim (less direct, allows force quitting)
+    public void launchGameShim (string ExeFolder, string ExeName, string Args) {
+        launchedGame = new Process();
+
+        // Use to create no window when running from shell
+        launchedGame.StartInfo.UseShellExecute = true;
+        launchedGame.StartInfo.CreateNoWindow = true;
+        launchedGame.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
+
+        // Set shim launch parameters. Assuming Shim is in game folder root.
+        launchedGame.StartInfo.WorkingDirectory = PathtoGames;
+        launchedGame.StartInfo.FileName = "CabinetUIShim.exe";
+
+        // Collect arguments
+        // First working directory, then EXE name, then the game's args.
+        // Example: "C:/CabinetUI/Data/Games/Super Toast/" "SuperToast.exe" -hardmode -decaf
+        launchedGame.StartInfo.Arguments = "\"" + PathtoGames + "/" + ExeFolder + "\" ";
+        launchedGame.StartInfo.Arguments += "\"" + ExeName +"\" ";
+        launchedGame.StartInfo.Arguments += Args;
+
+        // Start the game
+        Application.runInBackground = true;
+        launchedGame.Start();
+
+        // UI will halt until shim script is finished
+        launchedGame.WaitForExit();
+    }
+
+    // Use this for initialization
+    void Start () {
+        PathtoGames = Application.dataPath + "/Games";
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKey("q"))
-        {
-            launchedGame.Kill();
-            UnityEngine.Debug.Log("Killed");
-        }
             
 	}
 }
