@@ -18,7 +18,7 @@ public class LaunchExternalProgram : MonoBehaviour {
         launchedGame.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
 
         // Set game launch parameters
-        launchedGame.StartInfo.WorkingDirectory = PathtoGames + "/" + ExeFolder;
+        launchedGame.StartInfo.WorkingDirectory = PathToGames + "/" + ExeFolder;
         launchedGame.StartInfo.FileName = ExeName;
         launchedGame.StartInfo.Arguments = Args;
 
@@ -40,13 +40,13 @@ public class LaunchExternalProgram : MonoBehaviour {
         launchedGame.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
 
         // Set shim launch parameters. Assuming Shim is in game folder root.
-        launchedGame.StartInfo.WorkingDirectory = PathtoGames;
+        launchedGame.StartInfo.WorkingDirectory = PathToGames;
         launchedGame.StartInfo.FileName = "CabinetUIShim.exe";
 
         // Collect arguments
         // First working directory, then EXE name, then the game's args.
         // Example: "C:/CabinetUI/Data/Games/Super Toast/" "SuperToast.exe" -hardmode -decaf
-        launchedGame.StartInfo.Arguments = "\"" + PathtoGames + "/" + ExeFolder + "\" ";
+        launchedGame.StartInfo.Arguments = "\"" + PathToGames + "/" + ExeFolder + "\" ";
         launchedGame.StartInfo.Arguments += "\"" + ExeName +"\" ";
         launchedGame.StartInfo.Arguments += Args;
 
@@ -60,7 +60,7 @@ public class LaunchExternalProgram : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        PathtoGames = Application.dataPath + "/Games";
+        PathToGames = Application.dataPath + "/Games";
     }
 	
 	// Update is called once per frame
