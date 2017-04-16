@@ -1,4 +1,7 @@
 ﻿using UnityEngine;
+using System;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Collections;
 using System.Diagnostics;
 
@@ -36,8 +39,8 @@ public class LaunchExternalProgram : MonoBehaviour {
 
         // Use to create no window when running from shell
         launchedGame.StartInfo.UseShellExecute = true;
-        launchedGame.StartInfo.CreateNoWindow = true;
-        launchedGame.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
+        launchedGame.StartInfo.CreateNoWindow = false;
+        launchedGame.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
 
         // Set shim launch parameters. Assuming Shim is in game folder root.
 		launchedGame.StartInfo.WorkingDirectory = Application.dataPath.Replace('/','\\');
@@ -49,8 +52,6 @@ public class LaunchExternalProgram : MonoBehaviour {
 		launchedGame.StartInfo.Arguments = "\"" + ExePath + "\" ";
         launchedGame.StartInfo.Arguments += "\"" + ExeName +"\" ";
         launchedGame.StartInfo.Arguments += Args;
-
-		print (launchedGame.StartInfo.Arguments);
 
         // Start the game
         Application.runInBackground = true;
@@ -65,7 +66,6 @@ public class LaunchExternalProgram : MonoBehaviour {
 		// The path must use backslashes (lmao Windows)
         PathToGames = Application.dataPath;
 		PathToGames = PathToGames.Replace('/','\\') + "\\Games";
-		print(PathToGames);
     }
 	
 	// Update is called once per frame

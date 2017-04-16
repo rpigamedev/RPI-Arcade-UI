@@ -24,7 +24,8 @@ public class SelectedGamePanel : MonoBehaviour {
 	}
 
 	public void LaunchCurrentGame () {
-		gameLaunch.launchGameShim (currentMetadata.GameFolderPath + "\\" + currentMetadata.ExeFolder, currentMetadata.ExeName, "");
+		print ("Test.");
+		gameLaunch.launchGameShim (currentMetadata.GameFolderPath + currentMetadata.ExeFolder, currentMetadata.ExeName, "");
 	}
 
 	// Use this for initialization

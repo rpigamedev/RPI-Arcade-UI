@@ -29,7 +29,6 @@ public class ScreenshotLoader : MonoBehaviour {
 		foreach (FileInfo imageInfo in allImageInfo) {
 			if (!imageInfo.Name.Contains (".meta")) {
 				Textures.Add(LoadPNG(imageInfo.FullName));
-				print ("Oh yes");
 			}
 		}
 	}

@@ -14,9 +14,9 @@ PlayerSettings:
   productName: Cabinet Frontend
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
-  m_SplashScreenBackgroundColor: {r: 0.13333334, g: 0.17254902, b: 0.21176471, a: 1}
-  m_ShowUnitySplashScreen: 0
-  m_ShowUnitySplashLogo: 1
+  m_SplashScreenBackgroundColor: {r: 0.7294118, g: 0.023529412, b: 0, a: 1}
+  m_ShowUnitySplashScreen: 1
+  m_ShowUnitySplashLogo: 0
   m_SplashScreenOverlayOpacity: 1
   m_SplashScreenAnimation: 1
   m_SplashScreenLogoStyle: 1
@@ -37,7 +37,9 @@ PlayerSettings:
     y: 0
     width: 1
     height: 1
-  m_SplashScreenLogos: []
+  m_SplashScreenLogos:
+  - logo: {fileID: 21300000, guid: f0cca305b586df944870a460326cbd2c, type: 3}
+    duration: 4
   m_SplashScreenBackgroundLandscape: {fileID: 0}
   m_SplashScreenBackgroundPortrait: {fileID: 0}
   m_VirtualRealitySplashScreen: {fileID: 0}
@@ -83,11 +85,11 @@ PlayerSettings:
   xboxEnableKinect: 0
   xboxEnableKinectAutoTracking: 0
   xboxEnableFitness: 0
-  visibleInBackground: 0
+  visibleInBackground: 1
   allowFullscreenSwitch: 0
   macFullscreenMode: 1
-  d3d9FullscreenMode: 0
-  d3d11FullscreenMode: 0
+  d3d9FullscreenMode: 1
+  d3d11FullscreenMode: 1
   xboxSpeechDB: 0
   xboxEnableHeadOrientation: 0
   xboxEnableGuest: 0
@@ -115,8 +117,8 @@ PlayerSettings:
   m_SupportedAspectRatios:
     4:3: 0
     5:4: 0
-    16:10: 0
-    16:9: 1
+    16:10: 1
+    16:9: 0
     Others: 0
   bundleIdentifier: com.Company.ProductName
   bundleVersion: 1.0
