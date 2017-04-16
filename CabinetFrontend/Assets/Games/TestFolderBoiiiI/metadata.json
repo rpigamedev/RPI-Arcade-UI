@@ -1,0 +1,33 @@
+{  
+   "GameName":"DIFFERENT GAME",
+   "Author":[  
+      "Author 1",
+      "Author 2"
+   ],
+   "Description":"DIFFERENT DESCRIPTION",
+   "ExeFolder":"bin",
+   "ExeName":"FamiTracker.exe",
+   "ScreenshotFolder":"shots",
+   "KeyW":"Move Up",
+   "KeyA":"Move Left",
+   "KeyS":"Move Down",
+   "KeyD":"Move Right",
+   "Key1":"",
+   "Key2":"",
+   "Key3":"",
+   "KeyZ":"Jump",
+   "KeyX":"Cry",
+   "KeyC":"Pout",
+   "Key5":"",
+   "KeyI":"",
+   "KeyJ":"",
+   "KeyK":"",
+   "KeyL":"",
+   "Key7":"",
+   "Key8":"",
+   "Key9":"",
+   "KeyB":"",
+   "KeyN":"",
+   "KeyM":"",
+   "Key6":""
+}
