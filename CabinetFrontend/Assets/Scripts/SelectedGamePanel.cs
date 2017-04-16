@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SelectedGamePanel : MonoBehaviour {
 
@@ -14,18 +15,26 @@ public class SelectedGamePanel : MonoBehaviour {
 		Title.GetComponent<UnityEngine.UI.Text> ().text = newMetadata.GameName;
 		//Update description
 		GameObject Description = transform.Find ("Description").gameObject;
-		Description.GetComponent<UnityEngine.UI.Text> ().text = newMetadata.Description;
+		Text descriptionText = Description.GetComponent<Text> ();
+		descriptionText.text = currentMetadata.Description;
+		//Append the authors
+		descriptionText.text += "\n\n<b>Game developed by:</b>\n";
+		foreach (string authorName in currentMetadata.Author) {
+			descriptionText.text += "\t" + authorName + "\n";
+		}
 		//Grab screenshots
 		GameObject ScreenshotLoaderObj = transform.Find ("ScreenshotLoader").gameObject;
 		ScreenshotLoader screen = ScreenshotLoaderObj.GetComponent<ScreenshotLoader> ();
 		screen.LoadAllScreenshots (newMetadata.GameFolderPath + "\\" + newMetadata.ScreenshotFolder);
 		GameObject Screenshot = transform.Find ("Screenshot").gameObject;
+		Screenshot.GetComponent<UnityEngine.UI.RawImage> ().texture = null;
 		Screenshot.GetComponent<UnityEngine.UI.RawImage> ().texture = screen.GetTexture ();
 	}
 
 	public void LaunchCurrentGame () {
-		print ("Test.");
+		Debug.Log ("Launching game: " + currentMetadata.GameName);
 		gameLaunch.launchGameShim (currentMetadata.GameFolderPath + currentMetadata.ExeFolder, currentMetadata.ExeName, "");
+		Debug.Log ("Game ended: " + currentMetadata.GameName);
 	}
 
 	// Use this for initialization

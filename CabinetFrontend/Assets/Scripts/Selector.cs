@@ -12,7 +12,7 @@ public class Selector : MonoBehaviour {
 	int titleIndex;
 	float buttonOffsets; //distance from button to button
 	float scrollPosToLerp; //0-1 position value scrolling list should be lerping to
-	int scrollDebounce = 0;
+	float scrollDebounceTimer = 0.0f;
 	// Use this for initialization
 	void Start () {
 		Cursor.visible = false;
@@ -28,19 +28,17 @@ public class Selector : MonoBehaviour {
 	void Update () {
 		selectorBox.position = Vector2.Lerp (selectorBox.position,gameTitleList[titleIndex].position,8*Time.deltaTime);
 		scrollBar.value = Mathf.Lerp (scrollBar.value,scrollPosToLerp,8*Time.deltaTime);
-		if (Mathf.Abs(Input.GetAxis ("Vertical")) < 0.1f)
-			scrollDebounce = scrollDebounce > 0 ? scrollDebounce - 1 : 0;
-		if (scrollDebounce == 0) {
+		if ((Time.realtimeSinceStartup - scrollDebounceTimer) > 0.15f) {
 			if (Input.GetAxis ("Vertical") > 0 && titleIndex - 1 >= 0) {
 				scrollPosToLerp += buttonOffsets;
 				titleIndex--;
 				selectedGamePanel.UpdateDisplayData (content.GetChild (titleIndex).FindChild ("Metadata").gameObject.GetComponent<GameMetadata> ());
-				scrollDebounce = 3;
+				scrollDebounceTimer = Time.realtimeSinceStartup;
 			} else if (Input.GetAxis ("Vertical") < 0 && titleIndex + 1 < content.childCount) {
 				scrollPosToLerp -= buttonOffsets;
 				titleIndex++;
 				selectedGamePanel.UpdateDisplayData (content.GetChild (titleIndex).FindChild ("Metadata").gameObject.GetComponent<GameMetadata> ());
-				scrollDebounce = 3;
+				scrollDebounceTimer = Time.realtimeSinceStartup;
 			}
 		}
 		if (Input.GetButtonDown ("Select")) {

@@ -6,6 +6,7 @@ using System.IO;
 public class ScreenshotLoader : MonoBehaviour {
 	public RawImage screenshotPanel;
 	public List<Texture2D> Textures;
+	public Texture2D PlaceholderTexture;
 
 	// Use this for initialization
 	void Start () {
@@ -25,11 +26,17 @@ public class ScreenshotLoader : MonoBehaviour {
 	public void LoadAllScreenshots (string path) {
 		Textures.Clear ();
 		DirectoryInfo dir = new DirectoryInfo (path);
-		FileInfo[] allImageInfo = dir.GetFiles ("*.*");
-		foreach (FileInfo imageInfo in allImageInfo) {
-			if (!imageInfo.Name.Contains (".meta")) {
-				Textures.Add(LoadPNG(imageInfo.FullName));
+		if (dir.Exists) {
+			FileInfo[] allImageInfo = dir.GetFiles ("*.*");
+			foreach (FileInfo imageInfo in allImageInfo) {
+				if (!imageInfo.Name.Contains (".meta")) {
+					Textures.Add(LoadPNG(imageInfo.FullName));
+				}
 			}
+		}
+		print (Textures.Count);
+		if (Textures.Count == 0) {
+			Textures.Add (PlaceholderTexture);
 		}
 	}
 
