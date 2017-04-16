@@ -36,14 +36,12 @@ if (ErrorLevel == 0) { ; If the process did not create successfully
 }
 
 Process, WaitClose, %2% ; Wait on the process to close
-WinMaximize, ahk_class UnityWndClass
 WinActivate, ahk_class UnityWndClass
 ExitApp                 ; ...then close yourself.
 
 ; Define the exit hotkey here.
 *f::
    Process, Close, %2%
-   WinMaximize, ahk_class UnityWndClass
    WinActivate, ahk_class UnityWndClass
    ExitApp
 return

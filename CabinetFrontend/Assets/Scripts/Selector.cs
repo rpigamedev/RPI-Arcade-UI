@@ -15,6 +15,7 @@ public class Selector : MonoBehaviour {
 	bool scrollDebounce = false;
 	// Use this for initialization
 	void Start () {
+		Cursor.visible = false;
 		for (int i = 0; i < content.childCount; i++) {
 			gameTitleList.Add(content.GetChild (i).gameObject.GetComponent<RectTransform>());
 		}
