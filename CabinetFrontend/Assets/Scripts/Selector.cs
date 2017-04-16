@@ -45,5 +45,8 @@ public class Selector : MonoBehaviour {
 		if (Input.GetButtonDown ("Select")) {
 			selectedGamePanel.LaunchCurrentGame ();
 		}
+		if (Input.GetKeyDown (KeyCode.Escape)) {
+			Application.Quit ();
+		}
 	}
 }
