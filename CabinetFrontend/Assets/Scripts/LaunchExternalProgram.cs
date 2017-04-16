@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Collections;
@@ -42,8 +43,8 @@ public class LaunchExternalProgram : MonoBehaviour {
         launchedGame.StartInfo.CreateNoWindow = false;
         launchedGame.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
 
-        // Set shim launch parameters. Assuming Shim is in game folder root.
-		launchedGame.StartInfo.WorkingDirectory = Application.dataPath.Replace('/','\\');
+		// Set shim launch parameters. Assuming Shim is in frontend build folder. 
+		launchedGame.StartInfo.WorkingDirectory = Path.GetFullPath(Path.Combine(Application.dataPath.Replace('/','\\'), @"..\"));
         launchedGame.StartInfo.FileName = "CabinetUIShim.exe";
 
         // Collect arguments
@@ -64,8 +65,7 @@ public class LaunchExternalProgram : MonoBehaviour {
     // Use this for initialization
     void Start () {
 		// The path must use backslashes (lmao Windows)
-        PathToGames = Application.dataPath;
-		PathToGames = PathToGames.Replace('/','\\') + "\\Games";
+		PathToGames = Path.GetFullPath(Path.Combine(Application.dataPath.Replace('/','\\'), @"..\Games"));
     }
 	
 	// Update is called once per frame

@@ -13,7 +13,7 @@ public class MetadataManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		PathToGames = Application.dataPath.Replace ('/', '\\') + "\\Games";
+		PathToGames = Path.GetFullPath(Path.Combine(Application.dataPath.Replace('/','\\'), @"..\Games"));
 		string[] gameFolders = Directory.GetDirectories (PathToGames);
 		foreach (string folderPath in gameFolders) {
 			string metaFilePath = folderPath + "\\metadata.json";
